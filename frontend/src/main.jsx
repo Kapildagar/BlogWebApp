@@ -19,6 +19,7 @@ import { store, persistor } from './Redux/store/store.js';
 import UpdateProfilePage from './components/Profile/UpdateProfilePage.jsx';
 import { CreateBlog } from './components/Blog/CreateBlog.jsx';
 import { Blog } from './components/Blog/Blog.jsx';
+import AllBlog from './components/Blog/AllBlog.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
      <Route path='profile' element={<Profile/>}/>
      <Route path='updateprofile' element={<UpdateProfilePage/>}/>
      <Route path='CreateBlog' element={<CreateBlog/>}/>
+     <Route path='AllBlog' element={<AllBlog/>}/>
     </Route>
   )
 );

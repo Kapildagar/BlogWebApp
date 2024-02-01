@@ -37,7 +37,7 @@ const Navbar = () => {
             <nav className="bg-gray-800 p-4">
                 <div className="container mx-auto flex items-center justify-between">
                     <div className="flex items-center">
-                        <a href="#" className="text-white text-lg font-bold">
+                        <a href="/" className="text-white text-lg font-bold">
                             Your Logo
                         </a>
 
