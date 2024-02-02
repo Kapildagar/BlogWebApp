@@ -1,9 +1,17 @@
-import  { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { createUser, setsuccess } from '../../Redux/slice/userSlice';
-import { setdata,seterror } from '../../Redux/slice/userSlice';
+import  {  useState } from 'react';
+import { useDispatch, useSelector} from 'react-redux';
+// import { createUser, setsuccess } from '../../Redux/slice/userSlice';
+// import { setdata,seterror } from '../../Redux/slice/userSlice';
 import {useNavigate} from "react-router-dom"
+import { setError, setLoading, setUser } from '../../Redux/slice/loginSlice';
+import axios from 'axios';
+
 const SignUp = () => {
+
+   const {isloading,user,iserror}=useSelector((state)=>(state.login))
+   console.log(isloading)
+   console.log(user)
+   console.log(iserror)
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -14,22 +22,22 @@ const SignUp = () => {
   });
   const navigate=useNavigate()
   const dispatch=useDispatch();
-  const data=useSelector(setdata)
-   console.log(data);
-   const success=useSelector(setsuccess)
-   const error=useSelector(seterror)
-   console.log(success);
+  // const data=useSelector(setdata)
+  //  console.log(data);
+  // //  const success=useSelector(setsuccess)
+  //  const error=useSelector(seterror)
+  //  console.log(success);
 
-  useEffect(()=>{
-    if(error){
-       console.log(error);
-    }
-     if(success){
-      navigate("/");
-     }
-  },
-  [success,navigate,error]
-  )
+  // useEffect(()=>{
+  //   if(error){
+  //      console.log(error);
+  //   }
+  //    if(success){
+  //     navigate("/");
+  //    }
+  // },
+  // [success,navigate,error]
+  // )
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value, files } = e.target;
@@ -39,7 +47,8 @@ const SignUp = () => {
     }));
   };
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e)=> {
+    try{
     e.preventDefault();
     // Handle form submission, e.g., send data to a server
     const fd=new FormData();
@@ -49,7 +58,25 @@ const SignUp = () => {
     fd.append('coverImage',formData.coverImage)
     fd.append('password',formData.password)
     fd.append('fullName',formData.fullName)
-    dispatch(createUser(fd))
+    dispatch(setLoading(true));
+    const res=await axios.post(`http://localhost:3000/api/v1/user/register`, fd);
+    if(res.data.success){
+      dispatch(setLoading(false));
+      dispatch(setError(false));
+      dispatch(setUser(res.data.data))
+      navigate('/login');
+    }
+    console.log(res);
+    // dispatch(createUser(fd))
+    }
+    catch(err){
+      dispatch(setLoading(false));
+      dispatch(setError(true));
+      console.log(err);
+      dispatch(setError(false));
+    }
+
+    
     // console.log('Form Data:', fd);
   };
 
@@ -128,10 +155,10 @@ const SignUp = () => {
         <input type="file" id="coverImage" name="coverImage" accept="image/*" className="w-full  border border-gray-300 rounded" onChange={handleChange} />
       </div>
       <button
-        type="submit"
+        type="submit" 
         className="bg-blue-500 text-white font-bold  p-2 rounded border-[2px] border-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 w-full"
       >
-        Sign Up
+        {isloading?"Loading..":"SignUp"}
       </button>
     </form>
     </div>

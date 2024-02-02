@@ -2,6 +2,7 @@
 
  import userReducer from "../slice/userSlice.js"
  import blogReducer from '../slice/blogSlice.js'
+ import loginReducer from "../slice/loginSlice.js"
  import {
   persistStore,
   persistReducer,
@@ -33,7 +34,8 @@ const persistConfig = {
 };
 const rootReducer=combineReducers({
   user:userReducer,
-  blog:blogReducer
+  blog:blogReducer,
+  login:loginReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

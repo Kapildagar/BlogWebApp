@@ -23,13 +23,13 @@ import AllBlog from './components/Blog/AllBlog.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App/>} >
+    <Route path="/" element={<App />} >
       {/* <Route path='' element={<App/>}/> */}
       <Route path='' element={<Blog/>}/>
      <Route path='login' element={<Login/>}/>
      <Route path='signup' element={<SignUP/>}/>
      <Route path='profile' element={<Profile/>}/>
-     <Route path='updateprofile' element={<UpdateProfilePage/>}/>
+     <Route path='updateprofile' element={<UpdateProfilePage/> }/>
      <Route path='CreateBlog' element={<CreateBlog/>}/>
      <Route path='AllBlog' element={<AllBlog/>}/>
     </Route>

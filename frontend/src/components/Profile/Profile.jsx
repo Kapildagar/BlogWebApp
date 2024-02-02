@@ -4,7 +4,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Link } from "react-router-dom";
 
 const Profile = () => {
-  const { success, user, islogout } = useSelector((state) => state)
+  const { iserror, user, isloading } = useSelector((state) => (state.login))
   console.log(user)
   return (
     <>

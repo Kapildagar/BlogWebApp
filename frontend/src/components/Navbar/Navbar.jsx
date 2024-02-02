@@ -1,31 +1,51 @@
 // import { NavLink } from "react-router-dom"
-import { useEffect, useState } from "react";
-import { clearData, logoutuser } from "../../Redux/slice/userSlice";
+import {  useState } from "react";
+// import { clearData, logoutuser } from "../../Redux/slice/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { FaSignInAlt, FaUserPlus, FaSignOutAlt } from 'react-icons/fa'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { setError, setLoading, setUser } from "../../Redux/slice/loginSlice";
+import axios from "axios"
 // import presistor from '../Redux/store/store.js'
 
 
 
 const Navbar = () => {
-   
-    const {success,user,islogout}=useSelector((state)=>state.user)
+    const navigate=useNavigate();
+    const {user}=useSelector((state)=>state.login)
     console.log(user)
-    console.log(success)
-     console.log(islogout)
+    // console.log(success)
+    //  console.log(islogout)
     // console.log(user.avatar)
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
     const dispatch=useDispatch();
-    useEffect(()=>{
-            if(islogout && success){
-                alert("you have logged out suceesfully")
-                dispatch(clearData())
-            }
-    },[islogout,success,dispatch])
+    // useEffect(()=>{
+    //         if(islogout && success){
+    //             alert("you have logged out suceesfully")
+    //             dispatch(clearData())
+    //             navigate("/")
+    //         }
+    // },[islogout,success,dispatch,navigate])
     
-    const handlelogout=()=>{
-           dispatch(logoutuser());
+    const handlelogout=async(e)=>{
+        try{
+            e.preventDefault();
+            setLoading(true)
+           const res=await axios.post("http://localhost:3000/api/v1/user/logout",{},{
+            withCredentials: true,    // IMPORTANT!!!
+          })
+          console.log(res);
+          if(res.data.success){
+            dispatch(setLoading(false));
+            dispatch(setError(false));
+            dispatch(setUser({}));
+          }
+        }
+        catch(err){
+            dispatch(setError("true"));
+            navigate("/");
+        }
+          
     }
 
     const toggleMobileMenu = () => {
@@ -58,7 +78,7 @@ const Navbar = () => {
                     </div>
 
                     <div className="flex items-center gap-2">
-                        {success ?
+                        {user?
                             <div className={`container mx-auto flex  items-center justify-between gap-2`}>
                                 <button
                                      onClick={handlelogout}
@@ -129,16 +149,16 @@ const Navbar = () => {
                     <a href="#" className="block text-white">
                         Contact
                     </a>
-                    <a href="#" className={`${success ? "hidden" : "flex"} items-center gap-2  text-white`}>
+                    <a href="#" className={`${user ? "hidden" : "flex"} items-center gap-2  text-white`}>
                         <span>Login</span>
                         <FaSignInAlt />
 
                     </a>
-                    <a href="#" className={`${success ? "hidden" : "flex"} items-center gap-2  text-white`}>
+                    <a href="#" className={`${user ? "hidden" : "flex"} items-center gap-2  text-white`}>
                         <span>Sign Up</span>
                         <FaUserPlus />
                     </a>
-                    <a href="#"  className={`${success ? "flex" : "hidden"} items-center gap-2  text-white`}  >
+                    <a href="#"  className={`${user? "flex" : "hidden"} items-center gap-2  text-white`}  >
                         <span>Logout</span>
                         <FaSignOutAlt />
                     </a>

@@ -15,24 +15,24 @@ const createUser = createAsyncThunk(
   }
 )
 
-const loginuser = createAsyncThunk(
-  'users/loginuser', async (data) => {
-    try {
-      console.log(data)
-      const response = await axios.post("http://localhost:3000/api/v1/user/login", data,{
-        withCredentials: true    // IMPORTANT!!!
-      });
-      console.log(response)
-      console.log(response.data.success);
-      return response.data
-    }
-    catch (error) {
-      console.log(error)
-        throw error
-    }
-  }
+// const loginuser = createAsyncThunk(
+//   'users/loginuser', async (data) => {
+//     try {
+//       console.log(data)
+//       const response = await axios.post("http://localhost:3000/api/v1/user/login", data,{
+//         withCredentials: true    // IMPORTANT!!!
+//       });
+//       console.log(response)
+//       console.log(response.data.success);
+//       return response.data
+//     }
+//     catch (error) {
+//       console.log(error)
+//         throw error
+//     }
+//   }
 
-)
+// )
 
  const logoutuser=createAsyncThunk(
    "users/logoutuser",async()=>{
@@ -114,19 +114,19 @@ const usersSlice = createSlice({
       state.error = action.payload.error
       state.message = action.payload.message
     })
-    builder.addCase(loginuser.fulfilled, (state, action) => {
-      console.log(action.payload.data)
-      console.log(action.payload.success)
-      state.user=action.payload?.data?.user
-       state.success=action.payload?.success
-       state.islogout=action.payload.success?false:true
-     })
-    builder.addCase(loginuser.rejected,(state,action)=>{
-         console.log(action.error.message)
-      console.log("working1")
-         state.error=true,
-         state.message=action.error.message
-    })
+    // builder.addCase(loginuser.fulfilled, (state, action) => {
+    //   console.log(action.payload.data)
+    //   console.log(action.payload.success)
+    //   state.user=action.payload?.data?.user
+    //    state.success=action.payload?.success
+    //    state.islogout=action.payload.success?false:true
+    //  })
+    // builder.addCase(loginuser.rejected,(state,action)=>{
+    //      console.log(action.error.message)
+    //   console.log("working1")
+    //      state.error=true,
+    //      state.message=action.error.message
+    // })
     builder.addCase(logoutuser.fulfilled,(state,action)=>{
       console.log(action.payload)
       state.success=action.payload?.success
@@ -151,5 +151,5 @@ export const setsuccess = (state) => state.success
 export const seterror = (state) => state.error
 // export const setlogined=(state)=>state.islogined
 export const {clearError,clearData}=usersSlice.actions
-export { createUser, loginuser,logoutuser,updateProfile}
+export { createUser,logoutuser,updateProfile}
 export default usersSlice.reducer
