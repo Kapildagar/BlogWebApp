@@ -73,7 +73,7 @@ export const Blog = () => {
               <h1 className="font-bold w-fit my-[2px] text-[25px]">Latest Blog</h1>
           <div className="w-fit mx-auto flex gap-2">  
               {data.map((d, index) => {
-                return (<Link key={index} className="cursor-pointer">
+                return (<Link key={index} to={`/getBlog/${d._id}`} className="cursor-pointer">
                   <div className="p-2 border-[2px] border-none rounded-md bg-gray-700 ">
                     <img className="h-[200px] rounded-md" src={d.img_url} />
                     <h1 className="text-[20px] text-white my-1">{d ? d.tittle : "Tittle"}</h1>

@@ -20,6 +20,7 @@ import UpdateProfilePage from './components/Profile/UpdateProfilePage.jsx';
 import { CreateBlog } from './components/Blog/CreateBlog.jsx';
 import { Blog } from './components/Blog/Blog.jsx';
 import AllBlog from './components/Blog/AllBlog.jsx';
+import GetBlog from './components/Blog/getBlog.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
      <Route path='updateprofile' element={<UpdateProfilePage/> }/>
      <Route path='CreateBlog' element={<CreateBlog/>}/>
      <Route path='AllBlog' element={<AllBlog/>}/>
+     <Route path='getBlog/:id'  element={<GetBlog/>}/>
     </Route>
   )
 );
