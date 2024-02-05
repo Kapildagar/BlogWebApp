@@ -10,7 +10,7 @@ import blog from "./routes/Blog.routes.js";
 dotenv.config()
 
 const app=express()
-app.use(cors({origin:'https://webapp-mocha-six.vercel.app/',
+app.use(cors({origin:'https://webapp-mocha-six.vercel.app',
 methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 credentials: true,
 optionsSuccessStatus: 204,}));
