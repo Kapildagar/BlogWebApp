@@ -22,6 +22,9 @@ app.use(cookieParser());
 // // app.use(fileUpload())
 app.use("/api/v1/user",route);
 app.use("/api/v1/blog",blog);
+app.get('/',(req,res)=>{
+    res.send("working in the deployment mode");
+})
 
 app.listen(process.env.PORT||5000,async()=>{
     try{
