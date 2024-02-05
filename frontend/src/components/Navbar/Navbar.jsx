@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaSignInAlt, FaUserPlus, FaSignOutAlt } from 'react-icons/fa'
 import { Link, useNavigate } from "react-router-dom";
 import { setError, setLoading, setUser } from "../../Redux/slice/loginSlice";
+import backendRoutes from "../../../utilis/routes";
 import axios from "axios"
 // import presistor from '../Redux/store/store.js'
 
@@ -31,7 +32,7 @@ const Navbar = () => {
         try{
             e.preventDefault();
             setLoading(true)
-           const res=await axios.post("http://localhost:3000/api/v1/user/logout",{},{
+           const res=await axios.post(`${backendRoutes}/user/logout`,{},{
             withCredentials: true,    // IMPORTANT!!!
           })
           console.log(res);
@@ -62,7 +63,7 @@ const Navbar = () => {
                         </a>
 
                     </div>
-                    <div className={`hidden md:flex space-x-4 ml-4 ${isMobileMenuOpen ? 'hidden' : 'flex'}`}>
+                    {/* <div className={`hidden md:flex space-x-4 ml-4 ${isMobileMenuOpen ? 'hidden' : 'flex'}`}>
                         <a href="#" className="text-white">
                             Home
                         </a>
@@ -75,7 +76,7 @@ const Navbar = () => {
                         <a href="#" className="text-white">
                             Contact
                         </a>
-                    </div>
+                    </div> */}
 
                     <div className="flex items-center gap-2">
                         {user?
@@ -149,16 +150,16 @@ const Navbar = () => {
                     <a href="#" className="block text-white">
                         Contact
                     </a>
-                    <a href="#" className={`${user ? "hidden" : "flex"} items-center gap-2  text-white`}>
+                    <a href="/login" className={`${user ? "hidden" : "flex"} items-center gap-2  text-white`}>
                         <span>Login</span>
                         <FaSignInAlt />
 
                     </a>
-                    <a href="#" className={`${user ? "hidden" : "flex"} items-center gap-2  text-white`}>
+                    <a href="/signup" className={`${user ? "hidden" : "flex"} items-center gap-2  text-white`}>
                         <span>Sign Up</span>
                         <FaUserPlus />
                     </a>
-                    <a href="#"  className={`${user? "flex" : "hidden"} items-center gap-2  text-white`}  >
+                    <a href="/logout"  className={`${user? "flex" : "hidden"} items-center gap-2  text-white`}  >
                         <span>Logout</span>
                         <FaSignOutAlt />
                     </a>

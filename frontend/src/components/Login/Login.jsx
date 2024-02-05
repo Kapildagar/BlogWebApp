@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { setError, setLoading, setUser } from "../../Redux/slice/loginSlice";
-
+import backendRoutes from "../../../utilis/routes";
 const Login = () => {
     const use = useSelector(state => state.login);
     console.log(use)
@@ -35,7 +35,8 @@ const Login = () => {
     const handleSubmit = async (e) => {
         try {
             e.preventDefault()
-            const res = await axios.post("http://localhost:3000/api/v1/user/login", { email, password }, {
+            dispatch(setLoading(true));
+            const res = await axios.post(`${backendRoutes}/user/login`, { email, password }, {
                 withCredentials: true    // IMPORTANT!!!
             })
             console.log(res);
@@ -87,9 +88,9 @@ const Login = () => {
                                 </div>
                                 <a href="#" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">Forgot password?</a>
                             </div>
-                            <button type="submit" className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Sign in</button>
+                            <button type="submit" className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{isloading?"Loading...":"Sign up"}</button>
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                Don’t have an account yet? <a href="/signup" className="font-medium text-blue-600 hover:underline dark:text-blue-500">{isloading?"Loading...":"Sign up"}</a>
+                                Don’t have an account yet? <a href="/signup" className="font-medium text-blue-600 hover:underline dark:text-blue-500">SignUp</a>
                             </p>
                         </form>
                     </div>

@@ -21,18 +21,20 @@ import { CreateBlog } from './components/Blog/CreateBlog.jsx';
 import { Blog } from './components/Blog/Blog.jsx';
 import AllBlog from './components/Blog/AllBlog.jsx';
 import GetBlog from './components/Blog/getBlog.jsx';
+import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
+    
     <Route path="/" element={<App />} >
       {/* <Route path='' element={<App/>}/> */}
       <Route path='' element={<Blog/>}/>
      <Route path='login' element={<Login/>}/>
      <Route path='signup' element={<SignUP/>}/>
-     <Route path='profile' element={<Profile/>}/>
-     <Route path='updateprofile' element={<UpdateProfilePage/> }/>
-     <Route path='CreateBlog' element={<CreateBlog/>}/>
-     <Route path='AllBlog' element={<AllBlog/>}/>
+     <Route path='profile' element={<ProtectedRoutes><Profile/></ProtectedRoutes>}/>
+     <Route path='updateprofile' element={<ProtectedRoutes><UpdateProfilePage/></ProtectedRoutes>  }/>
+     <Route path='CreateBlog' element={<ProtectedRoutes><CreateBlog/></ProtectedRoutes>}/>
+     <Route path='AllBlog' element={<ProtectedRoutes><AllBlog/></ProtectedRoutes>}/>
      <Route path='getBlog/:id'  element={<GetBlog/>}/>
     </Route>
   )

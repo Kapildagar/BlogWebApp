@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
-
+import backendRoutes from "../../../utilis/routes";
 
 
 const GetBlog = () => {
@@ -10,7 +10,7 @@ const GetBlog = () => {
   console.log(id);
   useEffect(() => {
     (async () => {
-      const res = await axios.get(`http://localhost:3000/api/v1/blog/getBlog/${id}`)
+      const res = await axios.get(`${backendRoutes}/blog/getBlog/${id}`)
       if (res.data.success) {
         setData(res.data.data);
       }

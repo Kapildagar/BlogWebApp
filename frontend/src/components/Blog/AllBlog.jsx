@@ -4,7 +4,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-
+import backendRoutes from "../../../utilis/routes"
 
 
 const AllBlog = () => {
@@ -17,7 +17,7 @@ const AllBlog = () => {
 
   useEffect(() => {
     (async () => {
-      const res = await axios.get(`http://localhost:3000/api/v1/blog/getUserBlog/${user._id}`, {
+      const res = await axios.get(`${backendRoutes}/blog/getUserBlog/${user._id}`, {
         withCredentials: true
       })
       if (res.data.success) {
@@ -47,7 +47,7 @@ const AllBlog = () => {
     fd.append("tittle",editData.tittle);
     fd.append("des",editData.des);
     fd.append("blog_img",editData.img_url)
-    const res=await axios.post(`http://localhost:3000/api/v1/blog/update_blog/${editData._id}`, fd,{
+    const res=await axios.post(`${backendRoutes}/blog/update_blog/${editData._id}`, fd,{
       withCredentials: true
     });
     console.log(res);
@@ -58,9 +58,14 @@ const AllBlog = () => {
 
     seteditData(null)
   }
+  
+  const handleCancel=()=>{
+           seteditData(null);
+  }
+
   const handledelte = async (id) => {
     try {
-      const res = await axios.delete(`http://localhost:3000/api/v1/blog/delete_blog/${id}`, {
+      const res = await axios.delete(`${backendRoutes}/api/v1/blog/delete_blog/${id}`, {
         withCredentials: true
       });
       if(res.data.success){
@@ -97,7 +102,12 @@ const AllBlog = () => {
               {editData && editData._id == b._id ? <textarea type="text" value={editData.des} name="des" onChange={handleChange} cols={9} rows={9} className="border-[2px] sm:w-[570px]  border-red-500 rounded-md" ></textarea> : <p className="h-[200px] sm:w-[570px] overflow-y-auto border-[2px] rounded-md border-red-900">{b.des}</p>}
             </div>
             <div className="sm:flex sm:flex-row flex flex-col justify-center gap-2 my-[10px]">
-              {editData && editData._id == b._id ? <button className="border-[2px] border-red-600 my-[2px] sm:w-[200px] sm:h-[40px] rounded-md" onClick={handleSave} >Save</button> :
+              {editData && editData._id == b._id ?
+                <div className="flex gap-2">
+               <button className="border-[2px] border-red-600 my-[2px] sm:w-[200px] sm:h-[40px] rounded-md" onClick={handleCancel} >Cancel</button>
+               <button className="border-[2px] border-red-600 my-[2px] sm:w-[200px] sm:h-[40px] rounded-md" onClick={handleSave} >Save</button>
+               </div>
+                :
                 <button className="border-[2px] border-red-600 my-[2px] sm:w-[200px] sm:h-[40px] rounded-md" onClick={() => handleClick(b._id)} >Edit</button>}
               <button type="submit" className="border-[2px] border-red-600 my-[2px] sm:w-[200px] sm:h-[40px] rounded-md" onClick={() => handledelte(b._id)}>Delete</button>
             </div>

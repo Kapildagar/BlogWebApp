@@ -1,6 +1,6 @@
 import {  useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-
+import backendRoutes from "../../../utilis/routes";
 import { useNavigate } from "react-router-dom";
 import { setError, setLoading, setUser } from "../../Redux/slice/loginSlice";
 import axios from "axios"
@@ -12,12 +12,12 @@ const UpdateProfilePage = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { user, isloading, iserror } = useSelector((state) => (state.login))
+    const { user, isloading} = useSelector((state) => (state.login))
     // console.log(response)
     const [formData, setformData] = useState({
-        fullName: user.fullName,
-        email: user.email,
-        userName: user.username
+        fullName: user?.fullName,
+        email: user?.email,
+        userName: user?.username
     })
 
 
@@ -40,7 +40,7 @@ const UpdateProfilePage = () => {
             e.preventDefault()
             // console.log(formData)
             dispatch(setLoading(true));
-            const res = await axios.post("http://localhost:3000/api/v1/user/updateprofile", formData, {
+            const res = await axios.post(`${backendRoutes}/user/updateprofile`, formData, {
                 withCredentials: true    // IMPORTANT!!!
             })
             if (res.data.success) {

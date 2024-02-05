@@ -5,7 +5,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from "react-router-dom"
 import { setError, setLoading, setUser } from '../../Redux/slice/loginSlice';
 import axios from 'axios';
-
+import backendRoutes from '../../../utilis/routes';
 const SignUp = () => {
 
    const {isloading,user,iserror}=useSelector((state)=>(state.login))
@@ -59,7 +59,7 @@ const SignUp = () => {
     fd.append('password',formData.password)
     fd.append('fullName',formData.fullName)
     dispatch(setLoading(true));
-    const res=await axios.post(`http://localhost:3000/api/v1/user/register`, fd);
+    const res=await axios.post(`${backendRoutes}/user/register`, fd);
     if(res.data.success){
       dispatch(setLoading(false));
       dispatch(setError(false));

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 'use client';
 import { Carousel } from 'flowbite-react';
 import { Sidebar } from 'flowbite-react';
-
+import backendRoutes from "../../../utilis/routes";
 import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser } from 'react-icons/hi';
 export const Blog = () => {
 
@@ -14,7 +14,7 @@ export const Blog = () => {
   // const [loading,setloading]=useState(true);
   useEffect(() => {
     async function fetchData() {
-      const res = await axios("http://localhost:3000/api/v1/blog/all_blog");
+      const res = await axios(`${backendRoutes}/blog/all_blog`);
       setdata(res.data.data)
       console.log(res)
     }

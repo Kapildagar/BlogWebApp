@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react"
-
+import backendRoutes from "../../../utilis/routes";
 
 export const CreateBlog = () => {
   const [data,setdata]=useState({
@@ -27,7 +27,7 @@ const handleSubmit=async(e)=>{
      fd.append("blog_img",data.file)
      fd.append("des",data.des)
      console.log(fd)
-      const res=await axios.post('http://localhost:3000/api/v1/blog/create_blog',fd,{
+      const res=await axios.post(`${backendRoutes}/blog/create_blog`,fd,{
         withCredentials: true    // IMPORTANT!!!
       });
       console.log(res);
