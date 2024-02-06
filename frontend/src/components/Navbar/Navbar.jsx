@@ -39,7 +39,7 @@ const Navbar = () => {
           if(res.data.success){
             dispatch(setLoading(false));
             dispatch(setError(false));
-            dispatch(setUser({}));
+            dispatch(setUser(null));
           }
         }
         catch(err){
