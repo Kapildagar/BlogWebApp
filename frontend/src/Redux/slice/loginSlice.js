@@ -16,7 +16,7 @@ const loginSlice=createSlice({
         setUser:(state,action)=>{
           console.log(state),
           console.log(action.payload);
-          state.user=action.payload.user;
+          state.user=action?.payload?.user;
         },
         setLoading:(state,action)=>{
              state.isloading=action.payload;
