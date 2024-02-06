@@ -43,7 +43,7 @@ const Navbar = () => {
           }
         }
         catch(err){
-            dispatch(setError("true"));
+            dispatch(setError(true));
             navigate("/");
         }
           
