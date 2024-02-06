@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { setError, setLoading, setUser } from "../../Redux/slice/loginSlice";
 import backendRoutes from "../../../utilis/routes";
 import axios from "axios"
+import {persistor} from '../../Redux/store/store.js'
 // import presistor from '../Redux/store/store.js'
 
 
@@ -39,6 +40,7 @@ const Navbar = () => {
           if(res.data.success){
             dispatch(setLoading(false));
             dispatch(setError(false));
+              persistor.purge();
             dispatch(setUser(null));
           }
         }
