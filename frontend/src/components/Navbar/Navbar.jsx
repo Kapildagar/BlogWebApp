@@ -8,7 +8,6 @@ import { setError, setLoading, setUser } from "../../Redux/slice/loginSlice";
 import backendRoutes from "../../../utilis/routes";
 import axios from "axios"
 import {persistor} from '../../Redux/store/store.js'
-// import presistor from '../Redux/store/store.js'
 
 
 
@@ -37,20 +36,23 @@ const Navbar = () => {
             withCredentials: true,    // IMPORTANT!!!
           })
           console.log(res);
-          if(res.data.success){
+          if(res?.data?.success){
             dispatch(setLoading(false));
             dispatch(setError(false));
-              persistor.purge();
+            await persistor.purge();           
             dispatch(setUser(null));
           }
         }
         catch(err){
+            console.log(err)
+            console.log("going into the error")
+            dispatch(setLoading(false));
             dispatch(setError(true));
             navigate("/");
         }
           
     }
-
+   
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!isMobileMenuOpen);
     };
@@ -58,7 +60,7 @@ const Navbar = () => {
     return (
         <>
             <nav className="bg-gray-800 p-4">
-                <div className="container mx-auto flex items-center justify-between">
+                <div className={`container mx-auto flex items-center justify-between py-[10px] px-[5px] rounded-md border-white border-[2px]`}>
                     <div className="flex items-center">
                         <a href="/" className="text-white text-lg font-bold">
                             Your Logo
@@ -102,14 +104,14 @@ const Navbar = () => {
                             <div className={`container mx-auto hidden md:flex  items-center justify-between`}>
                                 <Link
                                     to="/login"
-                                    className={`text-white flex items-center space-x-2 mr-4 transition duration-300 ease-in-out transform hover:scale-110`}
+                                    className={`text-white flex items-center border-[2px] border-white rounded-md p-1 space-x-2 mr-4 transition duration-300 ease-in-out transform hover:scale-110`}
                                 >
                                     <span>Login</span>
                                     <FaSignInAlt />
                                 </Link>
                                 <Link
                                     to="/signup"
-                                    className="text-white flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-110"
+                                    className="text-white flex items-center border-[2px] border-white rounded-md  p-1  space-x-2 transition duration-300 ease-in-out transform hover:scale-110"
                                 >
                                     <span>Sign Up</span>
                                     <FaUserPlus />
@@ -140,31 +142,31 @@ const Navbar = () => {
 
                 {/* Mobile menu (hidden on larger screens) */}
                 <div className={`md:hidden bg-gray-800 p-4 ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
-                    <a href="#" className="block text-white">
+                    <a href="#" className="block text-white border-[2px] p-[4px] mb-[3px] border-white rounded-md  transition duration-300 ease-in-out transform hover:scale-110">
                         Home
                     </a>
-                    <a href="#" className="block text-white">
+                    <a href="#" className="block text-white border-[2px] p-[4px] mb-[3px] border-white rounded-md  transition duration-300 ease-in-out transform hover:scale-110">
                         About
                     </a>
-                    <a href="#" className="block text-white">
+                    <a href="#" className="block text-white border-[2px] p-[4px] mb-[3px] border-white rounded-md  transition duration-300 ease-in-out transform hover:scale-110">
                         Services
                     </a>
-                    <a href="#" className="block text-white">
+                    <a href="#" className="block text-white border-[2px] p-[4px] mb-[3px] border-white rounded-md  transition duration-300 ease-in-out transform hover:scale-110">
                         Contact
                     </a>
-                    <a href="/login" className={`${user ? "hidden" : "flex"} items-center gap-2  text-white`}>
+                    <a href="/login" className={`${user ? "hidden" : "flex"} items-center gap-2 border-[2px] p-[4px] mb-[3px] border-white rounded-md  text-white  transition duration-300 ease-in-out transform hover:scale-110`}>
                         <span>Login</span>
                         <FaSignInAlt />
 
                     </a>
-                    <a href="/signup" className={`${user ? "hidden" : "flex"} items-center gap-2  text-white`}>
+                    <a href="/signup" className={`${user ? "hidden" : "flex"} items-center gap-2  border-[2px] p-[4px] mb-[3px] border-white rounded-md text-white  transition duration-300 ease-in-out transform hover:scale-110`}>
                         <span>Sign Up</span>
                         <FaUserPlus />
                     </a>
-                    <a href="/logout"  className={`${user? "flex" : "hidden"} items-center gap-2  text-white`}  >
-                        <span>Logout</span>
+                    <button href="/logout"  className={`${user? "flex" : "hidden"} items-center gap-2   border-[2px] p-[4px] mb-[3px] border-white rounded-md text-white  transition duration-300 ease-in-out transform hover:scale-110`} onClick={handlelogout} >
+                        <span >Logout</span>
                         <FaSignOutAlt />
-                    </a>
+                    </button>
                 </div>
             </nav>
         </>
