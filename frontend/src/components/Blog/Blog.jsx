@@ -68,17 +68,11 @@ export const Blog = () => {
                 <Sidebar.Item href="/Createblog" icon={HiChartPie}>
                   Create Blog
                 </Sidebar.Item>
-                <Sidebar.Collapse icon={HiShoppingBag} label="Profile">
-                  <Sidebar.Item href="/updateprofile">Upadte Details</Sidebar.Item>
-                  <Sidebar.Item href="#">Upadte Images</Sidebar.Item>
-                  {/* <Sidebar.Item href="#">Refunds</Sidebar.Item>
-                  <Sidebar.Item href="#">Shipping</Sidebar.Item> */}
-                </Sidebar.Collapse>
+                  <Sidebar.Item href="/updateprofile" icon={HiInbox}>
+                  All Blog
+                </Sidebar.Item>       
                 <Sidebar.Item href="/AllBlog" icon={HiInbox}>
                   All Blog
-                </Sidebar.Item>
-                <Sidebar.Item href="#" icon={HiUser}>
-                  Delete Blog
                 </Sidebar.Item>
                 <Sidebar.Item href="#" icon={HiShoppingBag}>
                   Services
