@@ -46,9 +46,7 @@ const Login = () => {
                dispatch(setUser(res.data.data));
                navigate('/')
             }   
-            else{
-            dispatch(setLoading(false))   
-            }
+            
         }
         catch (err) {
             dispatch(setLoading(false))
