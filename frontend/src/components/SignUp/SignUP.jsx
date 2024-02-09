@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom"
 import { setError, setLoading, setUser } from '../../Redux/slice/loginSlice';
 import axios from 'axios';
 import backendRoutes from '../../../utilis/routes';
+import { setloading } from '../../Redux/slice/userSlice';
 const SignUp = () => {
 
    const {isloading,user,iserror}=useSelector((state)=>(state.login))
@@ -50,6 +51,7 @@ const SignUp = () => {
   const handleSubmit = async(e)=> {
     try{
     e.preventDefault();
+    
     // Handle form submission, e.g., send data to a server
     const fd=new FormData();
     fd.append('username',formData.username);
@@ -66,6 +68,7 @@ const SignUp = () => {
       dispatch(setUser(res.data.data))
       navigate('/login');
     }
+    dispatch(setloading(false));
     console.log(res);
     // dispatch(createUser(fd))
     }
@@ -158,7 +161,7 @@ const SignUp = () => {
         type="submit" 
         className="bg-blue-500 text-white font-bold  p-2 rounded border-[2px] border-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 w-full"
       >
-        {isloading?"Loading..":"SignUp"}
+        {isloading?"Loading...":"SignUp"}
       </button>
     </form>
     </div>

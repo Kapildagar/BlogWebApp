@@ -52,7 +52,7 @@ const Navbar = () => {
         }
           
     }
-
+   
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!isMobileMenuOpen);
     };
@@ -163,10 +163,10 @@ const Navbar = () => {
                         <span>Sign Up</span>
                         <FaUserPlus />
                     </a>
-                    <a href="/logout"  className={`${user? "flex" : "hidden"} items-center gap-2  border-[2px] p-[4px] mb-[3px] border-white rounded-md text-white  transition duration-300 ease-in-out transform hover:scale-110`}  >
+                    <button href="/logout"  className={`${user? "flex" : "hidden"} items-center gap-2   border-[2px] p-[4px] mb-[3px] border-white rounded-md text-white  transition duration-300 ease-in-out transform hover:scale-110`} onClick={handlelogout} >
                         <span >Logout</span>
                         <FaSignOutAlt />
-                    </a>
+                    </button>
                 </div>
             </nav>
         </>
