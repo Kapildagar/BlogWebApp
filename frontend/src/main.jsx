@@ -20,7 +20,7 @@ import UpdateProfilePage from './components/Profile/UpdateProfilePage.jsx';
 import { CreateBlog } from './components/Blog/CreateBlog.jsx';
 import { Blog } from './components/Blog/Blog.jsx';
 import AllBlog from './components/Blog/AllBlog.jsx';
-import GetBlog from './components/Blog/getBlog.jsx';
+import GetBlog from './components/Blog/GetBlog.jsx';
 import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes.jsx';
 
 const router = createBrowserRouter(

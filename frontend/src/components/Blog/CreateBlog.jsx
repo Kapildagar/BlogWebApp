@@ -38,7 +38,7 @@ const handleSubmit=async(e)=>{
 
     
     <>
-      <div className="h-screen bg-gray-100">
+      <div className="h-screen  mx-auto w-fit">
         <h1 className="text-[50px] font-bold text-center text-black">CREATE BLOG</h1>
         <div className="w-min-[300px] border-none border-[2px]  mt-[20px] md:mx-auto md:w-fit">
           <form className="flex flex-col gap-2 p-[10px] bg-white rounded shadow-md dark:bg-gray-800 dark:border-gray-700 " onSubmit={handleSubmit}>

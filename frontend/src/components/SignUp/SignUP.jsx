@@ -6,7 +6,7 @@ import {useNavigate} from "react-router-dom"
 import { setError, setLoading, setUser } from '../../Redux/slice/loginSlice';
 import axios from 'axios';
 import backendRoutes from '../../../utilis/routes';
-import { setloading } from '../../Redux/slice/userSlice';
+
 const SignUp = () => {
 
    const {isloading,user,iserror}=useSelector((state)=>(state.login))
@@ -68,7 +68,7 @@ const SignUp = () => {
       dispatch(setUser(res.data.data))
       navigate('/login');
     }
-    dispatch(setloading(false));
+    dispatch(setLoading(false));
     console.log(res);
     // dispatch(createUser(fd))
     }

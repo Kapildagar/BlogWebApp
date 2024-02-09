@@ -3,7 +3,9 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 'use client';
-import { Carousel } from 'flowbite-react';
+import { IoIosCreate } from "react-icons/io";
+import { FaUser,FaUserEdit,FaBlogger } from "react-icons/fa";
+import { Carousel,Card  } from 'flowbite-react';
 import { Sidebar } from 'flowbite-react';
 import backendRoutes from "../../../utilis/routes";
 import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser } from 'react-icons/hi';
@@ -25,7 +27,30 @@ export const Blog = () => {
 
   return (
     <>
+
+
+
       <div className="text-[40px] w-fit mx-auto font-sans font-bold text-gray-900">Blog</div>
+
+      
+
+
+<div className="sm:hidden flex gap-2 my-2 w-fit mx-auto">
+    <Card href="/updateprofile" className="w-fit flex flex-col items-center">
+    <FaUserEdit className="text-[25px]"/>
+    </Card>
+    <Card href="/AllBlog" className="w-fit flex flex-col items-center">
+    <FaBlogger className="text-[25px]" />
+    </Card>
+    <Card href="/CreateBlog" className="w-fit flex flex-col items-center">
+    <IoIosCreate  className="text-[25px]" />
+    </Card>
+    </div>
+
+   
+  
+
+      
       <div className="h-56 sm:h-72 mb-[20px]  ">
         <Carousel pauseOnHover>
           <img src="https://images.pexels.com/photos/262508/pexels-photo-262508.jpeg?auto=compress&cs=tinysrgb&w=400" className="object-fill" alt="..." />
