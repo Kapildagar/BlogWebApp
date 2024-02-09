@@ -93,9 +93,9 @@ export const Blog = () => {
             </Sidebar.Items>
           </Sidebar>
         </div>
-        <div className="sm:flex sm:flex-col sm:h-[500px] sm:overflow-y-auto ">
-        <div className="flex flex-col">
-              <h1 className="font-bold w-fit my-[2px] text-[25px]">Latest Blog</h1>
+        <div className="sm:flex sm:flex-col sm:h-[500px] sm:overflow-y-auto mx-auto">
+        <div className="flex flex-col"> 
+              <h1 className="font-bold w-fit my-[2px] text-[25px] mx-auto ">Latest Blog</h1>
           <div className="w-fit mx-auto flex gap-2">  
               {data.map((d, index) => {
                 return (<Link key={index} to={`/getBlog/${d._id}`} className="cursor-pointer">

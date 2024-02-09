@@ -5,6 +5,7 @@ import './App.css'
 import Navbar from './components/Navbar/Navbar.jsx'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
+import FooterC from './components/Footer/Footer.jsx';
 function App() {
 
   const path = useLocation().pathname.split('/')[1];
@@ -38,6 +39,7 @@ function App() {
         <Navbar />
         {/* <Blog/> */}
         <Outlet />
+        <FooterC/>
       </>
     )
   }
