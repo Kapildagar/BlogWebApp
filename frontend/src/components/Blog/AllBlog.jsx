@@ -65,7 +65,7 @@ const AllBlog = () => {
 
   const handledelte = async (id) => {
     try {
-      const res = await axios.delete(`${backendRoutes}/api/v1/blog/delete_blog/${id}`, {
+      const res = await axios.delete(`${backendRoutes}/blog/delete_blog/${id}`, {
         withCredentials: true
       });
       if(res.data.success){
